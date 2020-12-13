@@ -26,21 +26,21 @@ namespace PrisonBack.Controllers
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
         private readonly IInviteCodeService _inviteCodeService;
+        private readonly IAddUserService _addUserService;
 
-
-        public AuthenticationController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IInviteCodeService inviteCodeService)
+        public AuthenticationController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IInviteCodeService inviteCodeService, IAddUserService addUserService)
         {
             _configuration = configuration;
             _roleManager = roleManager;
             _userManager = userManager;
             _inviteCodeService = inviteCodeService;
+            _addUserService = addUserService;
         }
 
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
-            _inviteCodeService.CreateCode();
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
@@ -99,6 +99,7 @@ namespace PrisonBack.Controllers
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Nie udało się stworzyć użytkownika!" });
             _inviteCodeService.ChangeStatus(model.InviteCode);
+            _addUserService.AddUserToPrison(model.InviteCode, model.UserName);
             return Ok(new Response { Status = "Success", Message = "Utworzono użytkownika!" });
         }
         [HttpPost]

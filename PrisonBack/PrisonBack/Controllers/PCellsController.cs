@@ -34,6 +34,7 @@ namespace PrisonBack.Controllers
             return Ok(_mapper.Map<CellVM>(cell));
         }
         [HttpGet]
+
         public async Task<IEnumerable<Cell>> AllCell()
         {
             string userName = User.Identity.Name;
@@ -41,7 +42,6 @@ namespace PrisonBack.Controllers
             return cell;
         }
         [HttpPost]
-        [Authorize(Roles = UserRoles.Admin)]
         public ActionResult<CellVM> AddCell(CellDTO cellDTO)
         {
             string userName = User.Identity.Name;
@@ -58,7 +58,6 @@ namespace PrisonBack.Controllers
             return Ok();
         }
         [HttpDelete("{id}")]
-        [Authorize(Roles = UserRoles.Admin)]
         public ActionResult DeleteCell(int id)
         {
             string userName = User.Identity.Name;
@@ -73,7 +72,6 @@ namespace PrisonBack.Controllers
             return Ok();
         }
         [HttpPut("{id}")]
-        [Authorize(Roles = UserRoles.Admin)]
         public ActionResult UpdateCell(int id, CellDTO cellDTO)
         {
             string userName = User.Identity.Name;
