@@ -16,9 +16,9 @@ namespace PrisonBack.Services
         {
             _prisonerRepository = prisonerRepository;
         }
-        public async Task<IEnumerable<Prisoner>> AllPrisoner(int id)
+        public async Task<IEnumerable<Prisoner>> AllPrisoner(string userName)
         {
-            return await _prisonerRepository.AllPrisoner(id);
+            return await _prisonerRepository.AllPrisoner(userName);
         }
 
         public void CreatePrisoner(Prisoner prisoner)

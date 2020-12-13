@@ -9,7 +9,7 @@ namespace PrisonBack.Domain.Services
     public interface IPrisonerService
     {
         Prisoner SelectedPrisoner(int id);
-        Task<IEnumerable<Prisoner>> AllPrisoner(int id);
+        Task<IEnumerable<Prisoner>> AllPrisoner(string userName);
         bool SaveChanges();
         void CreatePrisoner(Prisoner prisoner);
         void DeletePrisoner(Prisoner prisoner);

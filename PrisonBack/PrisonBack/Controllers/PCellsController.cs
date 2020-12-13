@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PrisonBack.Auth;
 using PrisonBack.Domain.Models;
 using PrisonBack.Domain.Services;
 using PrisonBack.Resources;
@@ -9,16 +11,20 @@ using System.Threading.Tasks;
 namespace PrisonBack.Controllers
 {
     [Route("/api/[controller]")]
+    [Authorize]
 
     public class PCellsController : Controller
     {
+        private string controller = "Cele";
         private readonly ICellService _cellService;
         private readonly IMapper _mapper;
+        private readonly ILoggerService _loggerService;
 
-        public PCellsController(ICellService cellService, IMapper mapper)
+       public PCellsController(ICellService cellService, IMapper mapper, ILoggerService loggerService)
         {
             _cellService = cellService;
             _mapper = mapper;
+            _loggerService = loggerService;
         }
 
         [HttpGet("{id}")]
@@ -34,17 +40,22 @@ namespace PrisonBack.Controllers
             return cell;
         }
         [HttpPost]
+        [Authorize(Roles = UserRoles.Admin)]
         public ActionResult<CellVM> AddCell(CellDTO cellDTO)
         {
             var cellModel = _mapper.Map<Cell>(cellDTO);
-            _cellService.CreateCell(cellModel);
-            _cellService.SaveChanges();
+            if (cellModel != null)
+            {
+                _cellService.CreateCell(cellModel);
+                _cellService.SaveChanges();
+                _loggerService.AddLog(controller, "Dodano nową cele", cellModel.IdPrison);
 
-
+            }
 
             return Ok();
         }
         [HttpDelete("{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public ActionResult DeleteCell(int id)
         {
             var cell = _cellService.SelectedCell(id);
@@ -54,9 +65,11 @@ namespace PrisonBack.Controllers
             }
             _cellService.DeleteCell(cell);
             _cellService.SaveChanges();
+            _loggerService.AddLog(controller, "Usunięto cele o ID " + cell.Id, cell.IdPrison);
             return Ok();
         }
         [HttpPut("{id}")]
+        [Authorize(Roles = UserRoles.Admin)]
         public ActionResult UpdateCell(int id, CellDTO cellDTO)
         {
             var cell = _cellService.SelectedCell(id);
@@ -68,6 +81,7 @@ namespace PrisonBack.Controllers
             _cellService.UpdateCell(cell);
             _cellService.SaveChanges();
 
+            _loggerService.AddLog(controller, "Edytowano cele o ID " + cell.Id, cell.IdPrison);
 
             return NoContent();
         }

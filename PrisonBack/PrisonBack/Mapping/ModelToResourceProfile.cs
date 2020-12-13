@@ -20,6 +20,7 @@ namespace PrisonBack.Mapping
             CreateMap<PassDTO, Pass>();
 
 
+
         }
     }
 }

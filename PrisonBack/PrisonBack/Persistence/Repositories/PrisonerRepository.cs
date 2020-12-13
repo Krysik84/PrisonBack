@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PrisonBack.Domain.Models;
 using PrisonBack.Domain.Repositories;
 using PrisonBack.Persistence.Context;
+using PrisonBack.Resources.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace PrisonBack.Persistence.Repositories
@@ -15,9 +18,18 @@ namespace PrisonBack.Persistence.Repositories
         {
 
         }
-        public async Task<IEnumerable<Prisoner>> AllPrisoner(int id)
+        public async Task<IEnumerable<Prisoner>> AllPrisoner(string userName)
         {
-            return await _context.Prisoners.Where(x => x.Cell.IdPrison == id).Include(x => x.Punishments).ToListAsync();
+            var prison = _context.UserPermissions.FirstOrDefault(x => x.UserName == userName);
+
+            return await _context.Prisoners.Where(x => x.Cell.IdPrison == prison.IdPrison).Include(x => x.Punishments).ToListAsync();
+            
+
+        }
+        public async Task<IEnumerable<UserPermission>> Prison(string userName)
+        {
+            return await _context.UserPermissions.Where(x => x.UserName == userName).ToListAsync();
+
         }
 
         public void CreatePrisoner(Prisoner prisoner)

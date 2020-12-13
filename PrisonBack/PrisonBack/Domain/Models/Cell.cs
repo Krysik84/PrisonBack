@@ -19,5 +19,7 @@ namespace PrisonBack.Domain.Models
         public virtual CellType CellType { get; set; }
         public virtual ICollection<Prisoner> Prisoner { get; set; }
 
+
+
     }
 }

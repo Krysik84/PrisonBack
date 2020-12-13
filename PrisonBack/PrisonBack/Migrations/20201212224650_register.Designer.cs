@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PrisonBack.Persistence.Context;
 
 namespace PrisonBack.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201212224650_register")]
+    partial class register
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -169,17 +171,11 @@ namespace PrisonBack.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Forname")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
@@ -259,24 +255,6 @@ namespace PrisonBack.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CellType");
-                });
-
-            modelBuilder.Entity("PrisonBack.Domain.Models.InviteCode", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Code")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("Status")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("InviteCodes");
                 });
 
             modelBuilder.Entity("PrisonBack.Domain.Models.Isolation", b =>
@@ -462,15 +440,7 @@ namespace PrisonBack.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
-                    b.Property<int>("IdPrison")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("IdPrison");
 
                     b.ToTable("UserPermission");
                 });
@@ -610,17 +580,6 @@ namespace PrisonBack.Migrations
                     b.Navigation("Prisoner");
 
                     b.Navigation("Reason");
-                });
-
-            modelBuilder.Entity("PrisonBack.Domain.Models.UserPermission", b =>
-                {
-                    b.HasOne("PrisonBack.Domain.Models.Prison", "Prison")
-                        .WithMany()
-                        .HasForeignKey("IdPrison")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Prison");
                 });
 
             modelBuilder.Entity("PrisonBack.Domain.Models.Cell", b =>

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PrisonBack.Domain.Models;
 using PrisonBack.Domain.Services;
@@ -12,6 +14,7 @@ using PrisonBack.Resources.ViewModels;
 namespace PrisonBack.Controllers
 {
     [Route("/api/[controller]")]
+    [Authorize]
     public class PrisonerController : Controller
     {
         private readonly IPrisonerService _prisonerService;
@@ -23,15 +26,20 @@ namespace PrisonBack.Controllers
             _mapper = mapper;
         }
         [HttpGet("{id}")]
+
+
         public ActionResult<PrisonerVM> SelectedPrisoner(int id)
         {
             var prisoner = _prisonerService.SelectedPrisoner(id);
             return Ok(_mapper.Map<PrisonerVM>(prisoner));
         }
         [HttpGet]
-        public async Task<IEnumerable<Prisoner>> AllPrisoner(int id)
+        public async Task<IEnumerable<Prisoner>> AllPrisoner()
         {
-            var prisoner = await _prisonerService.AllPrisoner(id);
+            string userName = User.Identity.Name;
+            
+
+            var prisoner = await _prisonerService.AllPrisoner(userName);
             return prisoner;
         }
         [HttpPost]

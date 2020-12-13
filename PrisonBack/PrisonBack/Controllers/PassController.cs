@@ -44,7 +44,6 @@ namespace PrisonBack.Controllers
             _passService.SetPrisonerStatusTrue(passModel);
 
             _passService.SaveChanges();
-
             return NoContent();
         }
         [HttpDelete("{id}")]
