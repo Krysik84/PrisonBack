@@ -17,9 +17,9 @@ namespace PrisonBack.Services
         {
             _passRepository = passRepository;
         }
-        public Task<IEnumerable<Pass>> AllPass(int id)
+        public Task<IEnumerable<Pass>> AllPass(string userName)
         {
-            return _passRepository.AllPass(id);
+            return _passRepository.AllPass(userName);
         }
 
         public void CreatePass(Pass pass)

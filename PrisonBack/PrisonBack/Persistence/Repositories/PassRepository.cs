@@ -17,9 +17,10 @@ namespace PrisonBack.Persistence.Repositories
         {
         }
 
-        public async Task<IEnumerable<Pass>> AllPass(int id)
+        public async Task<IEnumerable<Pass>> AllPass(string userName)
         {
-            return await _context.Passes.Where(x => x.Prisoner.Cell.IdPrison == id).Include(x => x.Prisoner).ToListAsync();
+            var prison = _context.UserPermissions.FirstOrDefault(x => x.UserName == userName);
+            return await _context.Passes.Where(x => x.Prisoner.Cell.IdPrison == prison.IdPrison).Include(x => x.Prisoner).ToListAsync();
         }
 
         public void CreatePass(Pass pass)

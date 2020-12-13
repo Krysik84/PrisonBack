@@ -20,9 +20,9 @@ namespace PrisonBack.Services
         {
             return _cellRepository.SelectedCell(id);
         }
-        public async Task<IEnumerable<Cell>> AllCell(int id)
+        public async Task<IEnumerable<Cell>> AllCell(String userName)
         {
-            return await _cellRepository.AllCell(id);
+            return await _cellRepository.AllCell(userName);
         }
         public void CreateCell(Cell cell)
         {

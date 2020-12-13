@@ -91,6 +91,9 @@ namespace PrisonBack
             services.AddScoped<IInviteCodeService, InviteCodeService>();
             services.AddScoped<IInviteCodeRepository, InviteCodeRepository>();
 
+            services.AddScoped<IIsolationService, IsolationService>();
+            services.AddScoped<IIsolationRepository, IsolationRepository>();
+
             services.AddAutoMapper(typeof(ModelToResourceProfile));
             services.AddControllersWithViews()
     .AddNewtonsoftJson(options =>

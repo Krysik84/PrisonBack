@@ -9,7 +9,7 @@ namespace PrisonBack.Domain.Services
     public interface IPassService
     {
         Pass SelectedPass(int id);
-        Task<IEnumerable<Pass>> AllPass(int id);
+        Task<IEnumerable<Pass>> AllPass(string userName);
         bool SaveChanges();
         void CreatePass(Pass pass);
         void DeletePass(Pass pass);

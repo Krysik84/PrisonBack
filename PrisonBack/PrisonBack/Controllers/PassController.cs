@@ -30,9 +30,11 @@ namespace PrisonBack.Controllers
             return Ok(_mapper.Map<PassVM>(pass));
         }
         [HttpGet]
-        public async Task<IEnumerable<Pass>> AllPasses(int id)
+        public async Task<IEnumerable<Pass>> AllPasses()
         {
-            var pass = await _passService.AllPass(id);
+            string userName = User.Identity.Name;
+
+            var pass = await _passService.AllPass(userName);
             return pass;
         }
         [HttpPost]

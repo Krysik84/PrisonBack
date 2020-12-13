@@ -34,9 +34,10 @@ namespace PrisonBack.Controllers
             return Ok(_mapper.Map<CellVM>(cell));
         }
         [HttpGet]
-        public async Task<IEnumerable<Cell>> AllCell(int id)
+        public async Task<IEnumerable<Cell>> AllCell()
         {
-            var cell = await _cellService.AllCell(id);
+            string userName = User.Identity.Name;
+            var cell = await _cellService.AllCell(userName);
             return cell;
         }
         [HttpPost]

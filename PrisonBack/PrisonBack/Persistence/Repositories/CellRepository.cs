@@ -16,9 +16,10 @@ namespace PrisonBack.Persistence.Repositories
         {
 
         }
-        public async Task<IEnumerable<Cell>> AllCell(int id)
+        public async Task<IEnumerable<Cell>> AllCell(string userName)
         {
-            return await _context.Cells.Include(t => t.CellType).Where(x => x.IdPrison == id).ToListAsync();
+            var prison = _context.UserPermissions.FirstOrDefault(x => x.UserName == userName);
+            return await _context.Cells.Include(t => t.CellType).Where(x => x.IdPrison == prison.IdPrison).ToListAsync();
         }
         public Cell SelectedCell(int id)
         {
