@@ -8,6 +8,6 @@ namespace PrisonBack.Domain.Repositories
     public interface ILoggerRepository
     {
         bool SaveChanges();
-        void AddLog(string controller, string action, int id);
+        void AddLog(string controller, string action, string userName);
     }
 }

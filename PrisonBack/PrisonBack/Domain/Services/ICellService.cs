@@ -14,6 +14,7 @@ namespace PrisonBack.Domain.Services
         bool SaveChanges();
         void DeleteCell(Cell cell);
         void UpdateCell(Cell cell);
+        int PrisonID(string userName);
 
     }
 }

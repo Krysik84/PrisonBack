@@ -14,9 +14,9 @@ namespace PrisonBack.Services
         {
             _loggerRepository = loggerRepository;
         }
-        public void AddLog(string controller, string action, int id)
+        public void AddLog(string controller, string action, string userName)
         {
-            _loggerRepository.AddLog(controller, action, id);
+            _loggerRepository.AddLog(controller, action, userName);
         }
     }
 }

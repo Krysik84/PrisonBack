@@ -23,7 +23,7 @@ namespace PrisonBack.Persistence.Repositories
             var prison = _context.UserPermissions.FirstOrDefault(x => x.UserName == userName);
 
             return await _context.Prisoners.Where(x => x.Cell.IdPrison == prison.IdPrison).Include(x => x.Punishments).ToListAsync();
-            
+
 
         }
         public async Task<IEnumerable<UserPermission>> Prison(string userName)
@@ -55,6 +55,11 @@ namespace PrisonBack.Persistence.Repositories
 
         public void UpdatePrisoner(Prisoner prisoner)
         {
+        }
+        public int PrisonID(string userName)
+        {
+            var prison = _context.UserPermissions.FirstOrDefault(x => x.UserName == userName);
+            return prison.IdPrison;
         }
     }
 }

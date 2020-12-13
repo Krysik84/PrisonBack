@@ -41,5 +41,10 @@ namespace PrisonBack.Services
         {
             _cellRepository.UpdateCell(cell);
         }
+
+        public int PrisonID(string userName)
+        {
+            return _cellRepository.PrisonID(userName);
+        }
     }
 }

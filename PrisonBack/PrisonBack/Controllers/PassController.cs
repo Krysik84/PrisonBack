@@ -17,11 +17,15 @@ namespace PrisonBack.Controllers
     {
         private readonly IPassService _passService;
         private readonly IMapper _mapper;
+        private string controller = "Przepustki";
+        private readonly ILoggerService _loggerService;
 
-        public PassController(IPassService passService, IMapper mapper)
+
+        public PassController(IPassService passService, IMapper mapper, ILoggerService loggerService)
         {
             _passService = passService;
             _mapper = mapper;
+            _loggerService = loggerService;
         }
         [HttpGet("{id}")]
         public ActionResult<PassVM> SelectedPass(int id)
@@ -40,17 +44,24 @@ namespace PrisonBack.Controllers
         [HttpPost]
         public ActionResult<PassVM> AddPass(PassDTO passDTO)
         {
+            string userName = User.Identity.Name;
             var passModel = _mapper.Map<Pass>(passDTO);
+            if(passModel == null)
+            {
+                return NotFound();
+            }
             _passService.CreatePass(passModel);
-
             _passService.SetPrisonerStatusTrue(passModel);
-
             _passService.SaveChanges();
-            return NoContent();
+
+            _loggerService.AddLog(controller, "Dodano przepustkę więźnia", userName);
+
+            return Ok();
         }
         [HttpDelete("{id}")]
         public ActionResult DeletePass(int id)
         {
+            string userName = User.Identity.Name;
             var pass = _passService.SelectedPass(id);
             if (pass == null)
             {
@@ -62,12 +73,14 @@ namespace PrisonBack.Controllers
 
 
             _passService.SaveChanges();
+            _loggerService.AddLog(controller, "Usunięto przepustkę więźnia", userName);
 
-            return NoContent();
+            return Ok();
         }
         [HttpPut("{id}")]
         public ActionResult UpdatePass(int id, PassDTO passDTO)
         {
+            string userName = User.Identity.Name;
             var pass = _passService.SelectedPass(id);
             if (pass == null)
             {
@@ -76,9 +89,10 @@ namespace PrisonBack.Controllers
             _mapper.Map(passDTO, pass);
             _passService.UpdatePass(pass);
             _passService.SaveChanges();
+            _loggerService.AddLog(controller, "Edytowano przepustkę więźnia", userName);
 
 
-            return NoContent();
+            return Ok();
         }
 
        

@@ -44,21 +44,24 @@ namespace PrisonBack.Controllers
         [Authorize(Roles = UserRoles.Admin)]
         public ActionResult<CellVM> AddCell(CellDTO cellDTO)
         {
+            string userName = User.Identity.Name;
+
             var cellModel = _mapper.Map<Cell>(cellDTO);
-            if (cellModel != null)
+            cellModel.IdPrison = _cellService.PrisonID(userName);
+            if (cellModel == null)
             {
-                _cellService.CreateCell(cellModel);
-                _cellService.SaveChanges();
-                _loggerService.AddLog(controller, "Dodano nową cele", cellModel.IdPrison);
-
+                return NotFound();
             }
-
+            _cellService.CreateCell(cellModel);
+            _cellService.SaveChanges();
+            _loggerService.AddLog(controller, "Dodano nową cele", userName);
             return Ok();
         }
         [HttpDelete("{id}")]
         [Authorize(Roles = UserRoles.Admin)]
         public ActionResult DeleteCell(int id)
         {
+            string userName = User.Identity.Name;
             var cell = _cellService.SelectedCell(id);
             if(cell == null)
             {
@@ -66,13 +69,14 @@ namespace PrisonBack.Controllers
             }
             _cellService.DeleteCell(cell);
             _cellService.SaveChanges();
-            _loggerService.AddLog(controller, "Usunięto cele o ID " + cell.Id, cell.IdPrison);
+            _loggerService.AddLog(controller, "Usunięto cele o ID " + cell.Id, userName);
             return Ok();
         }
         [HttpPut("{id}")]
         [Authorize(Roles = UserRoles.Admin)]
         public ActionResult UpdateCell(int id, CellDTO cellDTO)
         {
+            string userName = User.Identity.Name;
             var cell = _cellService.SelectedCell(id);
             if(cell == null)
             {
@@ -82,9 +86,9 @@ namespace PrisonBack.Controllers
             _cellService.UpdateCell(cell);
             _cellService.SaveChanges();
 
-            _loggerService.AddLog(controller, "Edytowano cele o ID " + cell.Id, cell.IdPrison);
+            _loggerService.AddLog(controller, "Edytowano cele o ID " + cell.Id, userName);
 
-            return NoContent();
+            return Ok();
         }
 
     }

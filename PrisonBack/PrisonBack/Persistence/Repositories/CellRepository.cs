@@ -46,5 +46,10 @@ namespace PrisonBack.Persistence.Repositories
         public void UpdateCell(Cell cell)
         {
         }
+        public int PrisonID(string userName)
+        {
+            var prison = _context.UserPermissions.FirstOrDefault(x => x.UserName == userName);
+            return prison.IdPrison;
+        }
     }
 }

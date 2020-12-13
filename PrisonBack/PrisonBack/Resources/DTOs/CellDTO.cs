@@ -8,7 +8,6 @@ namespace PrisonBack.Resources
     public class CellDTO
     {
         public int Beds { get; set; }
-        public int IdPrison { get; set; }
         public int IdCellType { get; set; }
     }
 }

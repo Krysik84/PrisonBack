@@ -16,13 +16,16 @@ namespace PrisonBack.Controllers
     [Authorize]
     public class IsolationController : Controller
     {
+        private string controller = "Izolacje";
         private readonly IIsolationService _isolationService;
         private readonly IMapper _mapper;
+        private readonly ILoggerService _loggerService;
 
-        public IsolationController(IIsolationService isolationService, IMapper mapper)
+        public IsolationController(IIsolationService isolationService, IMapper mapper, ILoggerService loggerService)
         {
             _isolationService = isolationService;
             _mapper = mapper;
+            _loggerService = loggerService;
         }
         [HttpGet("{id}")]
         public ActionResult<PassVM> SelectedIsolation(int id)
@@ -41,17 +44,23 @@ namespace PrisonBack.Controllers
         [HttpPost]
         public ActionResult<IsolationVM> AddPass(IsolationDTO isolationDTO)
         {
+            string userName = User.Identity.Name;
             var isolationModel = _mapper.Map<Isolation>(isolationDTO);
+            if (isolationModel == null)
+            {
+                return NotFound();
+            }
             _isolationService.CreateIsolation(isolationModel);
-
             _isolationService.SetPrisonerStatusTrue(isolationModel);
-
             _isolationService.SaveChanges();
-            return NoContent();
+            _loggerService.AddLog(controller, "Dodano więźnia do izolatki", userName);
+            return Ok();
         }
         [HttpDelete("{id}")]
         public ActionResult DeleteIsolation(int id)
         {
+            string userName = User.Identity.Name;
+
             var isolation = _isolationService.SelectedIsolation(id);
             if (isolation == null)
             {
@@ -63,12 +72,13 @@ namespace PrisonBack.Controllers
 
 
             _isolationService.SaveChanges();
-
-            return NoContent();
+            _loggerService.AddLog(controller, "Usunięto więźnia z izolatki", userName);
+            return Ok();
         }
         [HttpPut("{id}")]
         public ActionResult UpdateIsolation(int id, IsolationDTO isolationDTO)
         {
+            string userName = User.Identity.Name;
             var isolation = _isolationService.SelectedIsolation(id);
             if (isolation == null)
             {
@@ -77,9 +87,10 @@ namespace PrisonBack.Controllers
             _mapper.Map(isolationDTO, isolation);
             _isolationService.UpdateIsolation(isolation);
             _isolationService.SaveChanges();
+            _loggerService.AddLog(controller, "Edytowano izolację więźnia", userName);
 
 
-            return NoContent();
+            return Ok();
         }
     }
 }

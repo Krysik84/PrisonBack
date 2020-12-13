@@ -14,6 +14,7 @@ namespace PrisonBack.Domain.Repositories
         void CreateCell(Cell cell);
         void DeleteCell(Cell cell);
         void UpdateCell(Cell cell);
+        int PrisonID(string userName);
 
     }
 }

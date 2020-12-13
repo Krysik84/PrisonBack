@@ -7,6 +7,6 @@ namespace PrisonBack.Domain.Services
 {
     public interface ILoggerService
     {
-        void AddLog(string controller, string action, int id);
+        void AddLog(string controller, string action, string userName);
     }
 }

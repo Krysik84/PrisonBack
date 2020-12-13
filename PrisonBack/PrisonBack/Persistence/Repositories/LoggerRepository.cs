@@ -15,13 +15,14 @@ namespace PrisonBack.Persistence.Repositories
         {
 
         }
-        public void AddLog(string controller, string action, int id)
+        public void AddLog(string controller, string action, string userName)
         {
+
             Logger loggerDTO = new Logger();
             loggerDTO.LogData = DateTime.Now;
             loggerDTO.Controller = controller;
             loggerDTO.Action = action;
-            loggerDTO.IdPrison = id;
+            loggerDTO.IdPrison = PrisonId(userName);
             _context.Loggers.Add(loggerDTO);
             SaveChanges();
         }
@@ -29,6 +30,11 @@ namespace PrisonBack.Persistence.Repositories
         public bool SaveChanges()
         {
             return (_context.SaveChanges() >= 0);
+        }
+        private int PrisonId(string userName)
+        {
+            var id = _context.UserPermissions.FirstOrDefault(x => x.UserName == userName);
+            return id.IdPrison;
         }
     }
 }
