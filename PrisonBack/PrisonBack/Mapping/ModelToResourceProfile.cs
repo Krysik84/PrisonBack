@@ -18,7 +18,6 @@ namespace PrisonBack.Mapping
             CreateMap<PrisonerDTO, Prisoner>();
             CreateMap<Pass, PassVM>();
             CreateMap<PassDTO, Pass>();
-            CreateMap<UserPermission, UserPermissionVM>();
 
 
 
