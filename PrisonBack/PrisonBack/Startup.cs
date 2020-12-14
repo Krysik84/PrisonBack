@@ -20,6 +20,7 @@ using PrisonBack.Services;
 using PrisonBack.Auth;
 using PrisonBack.Mailing;
 using PrisonBack.Mailing.Service;
+using Microsoft.Extensions.Options;
 
 namespace PrisonBack
 {
@@ -106,7 +107,7 @@ namespace PrisonBack
             services.AddTransient<IHostedService, MailNotificationService>();
             services.AddTransient<NotificationMail>();
 
-
+            
 
             services.AddAutoMapper(typeof(ModelToResourceProfile));
             services.AddControllersWithViews()

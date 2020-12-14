@@ -1,4 +1,5 @@
-﻿using PrisonBack.Domain.Services;
+﻿using PrisonBack.Domain.Repositories;
+using PrisonBack.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace PrisonBack.Mailing
     public class NotificationMail
     {
 
+       
         public string Body()
         {
-
-            return "Testowy mail";
+            return "PrisonBreak <br /> Dzisiaj jest " + DateTime.Now+ "<br /> Życzymi miłej pracy <br /> Team PrisonBreak";
         }
         public string Title()
         {
@@ -20,7 +21,7 @@ namespace PrisonBack.Mailing
         }
         public string To()
         {
-            return "barti.sk@gmail.com";
+            return "";
         }
     }
 }

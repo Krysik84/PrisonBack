@@ -3,6 +3,8 @@ using MailKit.Security;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using PrisonBack.Domain.Repositories;
+using PrisonBack.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,7 @@ namespace PrisonBack.Mailing.Service
             _mailRequest.Body = _registerMail.Body();
             _mailRequest.Subject = _registerMail.Title();
             _mailRequest.ToEmail = _registerMail.To();
+
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Mail);
             email.To.Add(MailboxAddress.Parse(_mailRequest.ToEmail));
