@@ -9,6 +9,6 @@ namespace PrisonBack.Domain.Repositories
     {
         bool IsActive(string code);
         void ChangeStatus(string code);
-        void CreateCode();
+        string CreateCode();
     }
 }

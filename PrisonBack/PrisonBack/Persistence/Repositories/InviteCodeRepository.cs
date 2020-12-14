@@ -23,14 +23,15 @@ namespace PrisonBack.Persistence.Repositories
             _context.SaveChanges();
         }
 
-        public void CreateCode()
-        {;
+        public string CreateCode()
+        {
             string guid = Guid.NewGuid().ToString();
             inviteCode.Code = guid;
             inviteCode.Status = true;
+            inviteCode.IdPrison = 1;
             _context.Add(inviteCode);
             _context.SaveChanges();
-
+            return guid;
         }
 
         public bool IsActive(string code)

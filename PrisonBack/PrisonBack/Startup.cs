@@ -18,7 +18,8 @@ using PrisonBack.Persistence.Repositories;
 using PrisonBack.Services;
 
 using PrisonBack.Auth;
-
+using PrisonBack.Mailing;
+using PrisonBack.Mailing.Service;
 
 namespace PrisonBack
 {
@@ -97,11 +98,16 @@ namespace PrisonBack
             services.AddScoped<IAddUserService, AddUserService>();
             services.AddScoped<IAddUserRepository, AddUserRepository>();
 
+            services.AddTransient<IMailService, MailService>();
+            services.AddTransient<RegisterMail>();
+
             services.AddAutoMapper(typeof(ModelToResourceProfile));
             services.AddControllersWithViews()
     .AddNewtonsoftJson(options =>
     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 );
+            services.Configure<MailSettings>(Configuration.GetSection("MailSettings"));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
