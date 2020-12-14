@@ -23,12 +23,13 @@ namespace PrisonBack.Persistence.Repositories
             _context.SaveChanges();
         }
 
-        public string CreateCode()
+        public string CreateCode(string userName)
         {
+            var prison = _context.UserPermissions.FirstOrDefault(x => x.UserName == userName);
             string guid = Guid.NewGuid().ToString();
             inviteCode.Code = guid;
             inviteCode.Status = true;
-            inviteCode.IdPrison = 1;
+            inviteCode.IdPrison = prison.IdPrison;
             _context.Add(inviteCode);
             _context.SaveChanges();
             return guid;

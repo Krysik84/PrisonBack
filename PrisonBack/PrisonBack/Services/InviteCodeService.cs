@@ -21,9 +21,9 @@ namespace PrisonBack.Services
             _inviteCodeRepository.ChangeStatus(code);
         }
 
-        public string CreateCode()
+        public string CreateCode(string userName)
         {
-            return _inviteCodeRepository.CreateCode();
+            return _inviteCodeRepository.CreateCode(userName);
         }
 
         public bool IsActive(string code)

@@ -14,12 +14,12 @@ namespace PrisonBack.Mailing
         {
             _inviteCodeService = inviteCodeService;
         }
-        public string Body()
+        public string Body(string userName)
         {
 
             return "PrisonBreak \n Witaj nowy użytkowniku \n Aby zarejestrować nowe konto postępuj zgodnie z instrukcją." +
                 "\n1. Wejdź na adres localhost:blabla\n2. Wypełnij wszystkie pola swoimi danymi\n" +
-                "3. Wpisz swój kod "+_inviteCodeService.CreateCode()+"\n4. Naciśnij zarejestruj\n5. Jeśli prawidłowo wypełniłeś wszystkie pola możesz przejść do logowania\n" +
+                "3. Wpisz swój kod "+_inviteCodeService.CreateCode(userName)+"\n4. Naciśnij zarejestruj\n5. Jeśli prawidłowo wypełniłeś wszystkie pola możesz przejść do logowania\n" +
                 "Pozdrawiamy team PrisonBreak";
         }
         public string Title()

@@ -20,9 +20,9 @@ namespace PrisonBack.Mailing.Service
             _registerMail = registerMail;
         }
 
-        public async Task SendEmailAsync(MailRequest mailRequest)
+        public async Task SendEmailAsync(MailRequest mailRequest, string userName)
         {
-            mailRequest.Body = _registerMail.Body();
+            mailRequest.Body = _registerMail.Body(userName);
             mailRequest.Subject = _registerMail.Title();
             var email = new MimeMessage();
             email.Sender = MailboxAddress.Parse(_mailSettings.Mail);

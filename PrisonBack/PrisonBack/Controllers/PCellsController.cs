@@ -15,7 +15,7 @@ namespace PrisonBack.Controllers
 
     public class PCellsController : Controller
     {
-        private string controller = "Cele";
+        private readonly string controller = "Cele";
         private readonly ICellService _cellService;
         private readonly IMapper _mapper;
         private readonly ILoggerService _loggerService;

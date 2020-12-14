@@ -7,6 +7,6 @@ namespace PrisonBack.Mailing.Service
 {
     public interface IMailService
     {
-        Task SendEmailAsync(MailRequest mailRequest);
+        Task SendEmailAsync(MailRequest mailRequest, string userName);
     }
 }

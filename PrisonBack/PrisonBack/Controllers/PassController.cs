@@ -17,7 +17,7 @@ namespace PrisonBack.Controllers
     {
         private readonly IPassService _passService;
         private readonly IMapper _mapper;
-        private string controller = "Przepustki";
+        private readonly string controller = "Przepustki";
         private readonly ILoggerService _loggerService;
 
 
