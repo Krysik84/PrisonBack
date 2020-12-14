@@ -1,4 +1,5 @@
-﻿using PrisonBack.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using PrisonBack.Domain.Models;
 using PrisonBack.Domain.Repositories;
 using PrisonBack.Persistence.Context;
 using PrisonBack.Resources.DTOs;
@@ -25,6 +26,11 @@ namespace PrisonBack.Persistence.Repositories
             loggerDTO.IdPrison = PrisonId(userName);
             _context.Loggers.Add(loggerDTO);
             SaveChanges();
+        }
+
+        public async Task<IEnumerable<Logger>> AllLogs(string userName)
+        {
+            return await _context.Loggers.Where(x => x.IdPrison == PrisonId(userName)).ToListAsync();
         }
 
         public bool SaveChanges()
