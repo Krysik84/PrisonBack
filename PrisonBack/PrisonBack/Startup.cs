@@ -100,6 +100,10 @@ namespace PrisonBack
 
             services.AddTransient<IMailService, MailService>();
             services.AddTransient<RegisterMail>();
+            services.AddTransient<IHostedService, MailNotificationService>();
+            services.AddTransient<NotificationMail>();
+
+
 
             services.AddAutoMapper(typeof(ModelToResourceProfile));
             services.AddControllersWithViews()
