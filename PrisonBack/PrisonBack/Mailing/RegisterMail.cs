@@ -17,10 +17,10 @@ namespace PrisonBack.Mailing
         public string Body(string userName)
         {
 
-            return "PrisonBreak \n Witaj nowy użytkowniku \n Aby zarejestrować nowe konto postępuj zgodnie z instrukcją." +
-                "\n1. Wejdź na adres localhost:blabla\n2. Wypełnij wszystkie pola swoimi danymi\n" +
-                "3. Wpisz swój kod "+_inviteCodeService.CreateCode(userName)+"\n4. Naciśnij zarejestruj\n5. Jeśli prawidłowo wypełniłeś wszystkie pola możesz przejść do logowania\n" +
-                "Pozdrawiamy team PrisonBreak";
+            return "PrisonBreak < br /> Witaj nowy użytkowniku <br /> Aby zarejestrować nowe konto postępuj zgodnie z instrukcją." +
+                " <br /> 1. Wejdź na adres localhost:blabla <br /> 2. Wypełnij wszystkie pola swoimi danymi<br />" +
+                "3. Wpisz swój kod " + _inviteCodeService.CreateCode(userName) + " <br /> 4. Naciśnij zarejestruj <br /> 5. Jeśli prawidłowo wypełniłeś wszystkie pola możesz przejść do logowania <br /> " +
+                "Pozdrawiamy team PrisonBreak"; 
         }
         public string Title()
         {

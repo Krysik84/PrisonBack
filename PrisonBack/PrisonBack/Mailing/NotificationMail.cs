@@ -9,7 +9,6 @@ namespace PrisonBack.Mailing
     public class NotificationMail
     {
 
-
         public string Body()
         {
 
@@ -21,7 +20,7 @@ namespace PrisonBack.Mailing
         }
         public string To()
         {
-            return "";
+            return "barti.sk@gmail.com";
         }
     }
 }

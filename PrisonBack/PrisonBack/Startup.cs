@@ -98,6 +98,9 @@ namespace PrisonBack
             services.AddScoped<IAddUserService, AddUserService>();
             services.AddScoped<IAddUserRepository, AddUserRepository>();
 
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+
             services.AddTransient<IMailService, MailService>();
             services.AddTransient<RegisterMail>();
             services.AddTransient<IHostedService, MailNotificationService>();
