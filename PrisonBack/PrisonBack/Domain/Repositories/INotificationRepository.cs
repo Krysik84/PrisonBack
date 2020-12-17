@@ -8,6 +8,10 @@ namespace PrisonBack.Domain.Repositories
 {
     public interface INotificationRepository
     {
-         List<Prisoner> ListOfPrisoner(string userName);
+         List<Prisoner> ListOfPrisoner(int prisonId);
+        UserPermission UserPermission(string userName);
+        List<string> EmailList();
+        string UserName(string email);
+
     }
 }

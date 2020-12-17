@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using PrisonBack.Mailing;
 using PrisonBack.Persistence.Context;
 
 namespace PrisonBack
@@ -24,6 +25,8 @@ namespace PrisonBack
             => Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(
                     webBuilder => webBuilder.UseStartup<Startup>());
+
+
     }
 
 

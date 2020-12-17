@@ -7,7 +7,7 @@ namespace PrisonBack.Mailing.Service
 {
     public interface IMailNotificationService
     {
-        void SendEmailAsync(MailRequest mailRequest);
+        Task SendEmailAsync();
 
     }
 }

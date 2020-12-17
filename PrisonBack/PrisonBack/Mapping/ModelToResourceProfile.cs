@@ -3,6 +3,7 @@ using PrisonBack.Resources.DTOs;
 using AutoMapper;
 using PrisonBack.Resources.ViewModels;
 using PrisonBack.Resources;
+using Microsoft.AspNetCore.Identity;
 
 namespace PrisonBack.Mapping
 {

@@ -99,15 +99,20 @@ namespace PrisonBack
             services.AddScoped<IAddUserService, AddUserService>();
             services.AddScoped<IAddUserRepository, AddUserRepository>();
 
-            services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
 
             services.AddTransient<IMailService, MailService>();
             services.AddTransient<RegisterMail>();
-            services.AddTransient<IHostedService, MailNotificationService>();
-            services.AddTransient<NotificationMail>();
+            services.AddTransient<INotificationRepository, NotificationRepository>();
+
+            services.AddTransient<INotificationMail, NotificationMail>();
 
             
+
+            services.AddScoped<IMailNotificationService, MailNotificationService>();
+            services.AddSingleton<IHostedService, TimerService>();
+
+
 
             services.AddAutoMapper(typeof(ModelToResourceProfile));
             services.AddControllersWithViews()

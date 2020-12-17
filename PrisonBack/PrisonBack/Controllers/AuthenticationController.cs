@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using PrisonBack.Auth;
 using PrisonBack.Domain.Models;
 using PrisonBack.Domain.Services;
+using PrisonBack.Mailing;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -27,20 +28,22 @@ namespace PrisonBack.Controllers
         private readonly IConfiguration _configuration;
         private readonly IInviteCodeService _inviteCodeService;
         private readonly IAddUserService _addUserService;
-
-        public AuthenticationController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IInviteCodeService inviteCodeService, IAddUserService addUserService)
+        private readonly INotificationMail _notificationService;
+        public AuthenticationController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration, IInviteCodeService inviteCodeService, IAddUserService addUserService, INotificationMail notificationService)
         {
             _configuration = configuration;
             _roleManager = roleManager;
             _userManager = userManager;
             _inviteCodeService = inviteCodeService;
             _addUserService = addUserService;
+            _notificationService = notificationService;
         }
 
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
         {
+
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
