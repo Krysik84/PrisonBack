@@ -39,6 +39,7 @@ namespace PrisonBack.Persistence.Repositories
         }
         public void DeleteCell(Cell cell)
         {
+            
             _context.Cells.Remove(cell);
         }
 

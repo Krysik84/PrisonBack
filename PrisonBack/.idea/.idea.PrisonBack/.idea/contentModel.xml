@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\kamil\.nuget\packages\microsoft.net.test.sdk\16.4.0\build\netcoreapp2.1" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="C:\Users\kamil\.nuget\packages\microsoft.testplatform.testhost\16.4.0\build\netcoreapp2.1\x64\testhost.dll" t="Include" />
+    <e p="C:\Users\kamil\.nuget\packages\microsoft.testplatform.testhost\16.4.0\build\netcoreapp2.1\x64\testhost.exe" t="Include" />
+    <e p="C:\Users\kamil\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.reporters.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\kamil\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.utility.netcoreapp10.dll" t="Include" />
+    <e p="C:\Users\kamil\.nuget\packages\xunit.runner.visualstudio\2.4.3\build\netcoreapp2.1\xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
+    <e p="C:\Users\kamil\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\kamil\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_PrisonBack.-8151639.00" t="ExcludeRecursive" />
+    <e p="C:\Users\kamil\RiderProjects\PrisonBack\PrisonBack" t="IncludeFlat">
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="PrisonBack" t="IncludeRecursive">
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="Auth" t="Include">
+          <e p="LoginModel.cs" t="Include" />
+          <e p="RegisterModel.cs" t="Include" />
+          <e p="Response.cs" t="Include" />
+          <e p="UserRoles.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="AuthenticationController.cs" t="Include" />
+          <e p="PassController.cs" t="Include" />
+          <e p="PCellsController.cs" t="Include" />
+          <e p="PrisonerController.cs" t="Include" />
+          <e p="PunishmentController.cs" t="Include" />
+        </e>
+        <e p="Domain" t="Include">
+          <e p="Models" t="Include">
+            <e p="ApplicationUser.cs" t="Include" />
+            <e p="Cell.cs" t="Include" />
+            <e p="CellType.cs" t="Include" />
+            <e p="InviteCode.cs" t="Include" />
+            <e p="Isolation.cs" t="Include" />
+            <e p="Logger.cs" t="Include" />
+            <e p="Pass.cs" t="Include" />
+            <e p="Prison.cs" t="Include" />
+            <e p="Prisoner.cs" t="Include" />
+            <e p="Punishment.cs" t="Include" />
+            <e p="Reason.cs" t="Include" />
+            <e p="UserPermission.cs" t="Include" />
+          </e>
+          <e p="Repositories" t="Include">
+            <e p="ICellRepository.cs" t="Include" />
+            <e p="IInviteCodeRepository.cs" t="Include" />
+            <e p="ILoggerRepository.cs" t="Include" />
+            <e p="IPassRepository.cs" t="Include" />
+            <e p="IPrisonerRepository.cs" t="Include" />
+            <e p="IPunishmentRepository.cs" t="Include" />
+          </e>
+          <e p="Services" t="Include">
+            <e p="ICellService.cs" t="Include" />
+            <e p="IInviteCodeService.cs" t="Include" />
+            <e p="ILoggerService.cs" t="Include" />
+            <e p="IPassService.cs" t="Include" />
+            <e p="IPrisonerService.cs" t="Include" />
+            <e p="IPunishmentService.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Mapping" t="Include">
+          <e p="ModelToResourceProfile.cs" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20201105021023_0511v11.cs" t="Include" />
+          <e p="20201105021023_0511v11.Designer.cs" t="Include" />
+          <e p="20201105021151_0511v12.cs" t="Include" />
+          <e p="20201105021151_0511v12.Designer.cs" t="Include" />
+          <e p="20201105021535_0511v13.cs" t="Include" />
+          <e p="20201105021535_0511v13.Designer.cs" t="Include" />
+          <e p="20201122223828_cells.cs" t="Include" />
+          <e p="20201122223828_cells.Designer.cs" t="Include" />
+          <e p="20201122230335_prisoner.cs" t="Include" />
+          <e p="20201122230335_prisoner.Designer.cs" t="Include" />
+          <e p="20201122230439_prisonerv2.cs" t="Include" />
+          <e p="20201122230439_prisonerv2.Designer.cs" t="Include" />
+          <e p="20201122231929_pass.cs" t="Include" />
+          <e p="20201122231929_pass.Designer.cs" t="Include" />
+          <e p="20201127155616_editType.cs" t="Include" />
+          <e p="20201127155616_editType.Designer.cs" t="Include" />
+          <e p="20201212224650_register.cs" t="Include" />
+          <e p="20201212224650_register.Designer.cs" t="Include" />
+          <e p="20201213003418_registerv2.cs" t="Include" />
+          <e p="20201213003418_registerv2.Designer.cs" t="Include" />
+          <e p="20201213003557_registerv3.cs" t="Include" />
+          <e p="20201213003557_registerv3.Designer.cs" t="Include" />
+          <e p="20201213013734_registerv4.cs" t="Include" />
+          <e p="20201213013734_registerv4.Designer.cs" t="Include" />
+          <e p="AppDbContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="PrisonBack.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Persistence" t="Include">
+          <e p="Context" t="Include">
+            <e p="AppDbContext.cs" t="Include" />
+          </e>
+          <e p="Repositories" t="Include">
+            <e p="BaseRepository.cs" t="Include" />
+            <e p="CellRepository.cs" t="Include" />
+            <e p="InviteCodeRepository.cs" t="Include" />
+            <e p="LoggerRepository.cs" t="Include" />
+            <e p="PassRepository.cs" t="Include" />
+            <e p="PrisonerRepository.cs" t="Include" />
+            <e p="PunishmentRepository.cs" t="Include" />
+          </e>
+        </e>
+        <e p="PrisonBack.csproj" t="IncludeRecursive" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+          <e p="ServiceDependencies" t="Include">
+            <e p="local" t="Include">
+              <e p="mssql1.arm.json" t="Include" />
+            </e>
+          </e>
+          <e p="serviceDependencies.json" t="Include" />
+          <e p="serviceDependencies.local.json" t="Include" />
+        </e>
+        <e p="Resources" t="Include">
+          <e p="DTOs" t="Include">
+            <e p="CellDTO.cs" t="Include" />
+            <e p="PassDTO.cs" t="Include" />
+            <e p="PrisonDTO.cs" t="Include" />
+            <e p="PrisonerDTO.cs" t="Include" />
+            <e p="PunishmentDTO.cs" t="Include" />
+          </e>
+          <e p="ViewModels" t="Include">
+            <e p="CellVM.cs" t="Include" />
+            <e p="PassVM.cs" t="Include" />
+            <e p="PrisonerVM.cs" t="Include" />
+            <e p="PunishmentVM.cs" t="Include" />
+            <e p="UserPermissionVM.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Services" t="Include">
+          <e p="CellService.cs" t="Include" />
+          <e p="InviteCodeService.cs" t="Include" />
+          <e p="LoggerService.cs" t="Include" />
+          <e p="PassService.cs" t="Include" />
+          <e p="PrisonerService.cs" t="Include" />
+          <e p="PunishmentService.cs" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+      </e>
+      <e p="PrisonBack.sln" t="IncludeFlat" />
+      <e p="PrisonBackTests" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Controllers" t="Include">
+          <e p="PassControllerTest.cs" t="Include" />
+          <e p="PCellsControllerTest.cs" t="Include" />
+        </e>
+        <e p="FakeStartup.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="PrisonBackTests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="PrisonBackTests.csproj" t="IncludeRecursive" />
+        <e p="Repositories" t="Include">
+          <e p="CellRepoTest.cs" t="Include" />
+          <e p="PassRepoTest.cs" t="Include" />
+        </e>
+        <e p="TestApplicationFactory.cs" t="Include" />
+        <e p="TestAuthHandler.cs" t="Include" />
+        <e p="TestBase.cs" t="Include" />
+        <e p="TestClaimsProvider.cs" t="Include" />
+        <e p="WebApplicationFactoryExtensions.cs" t="Include" />
+      </e>
+    </e>
+  </component>
+</project>

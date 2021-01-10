@@ -1,0 +1,124 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using NUnit.Framework;
+using PrisonBack.Controllers;
+using PrisonBack.Domain.Models;
+using PrisonBack.Mapping;
+using PrisonBack.Persistence.Context;
+using PrisonBack.Persistence.Repositories;
+using PrisonBack.Resources;
+using PrisonBack.Services;
+
+namespace PrisonBackTests.Controllers
+{
+    class PunishmentControllerIntegrationTests
+    {
+        private static IMapper _mapper;
+
+        [SetUp]
+        public void Setup()
+        {
+            var mappingConfig = new MapperConfiguration(mc => { mc.AddProfile(new ModelToResourceProfile()); });
+            IMapper mapper = mappingConfig.CreateMapper();
+            _mapper = mapper;
+
+        }
+
+        [Test]
+        public void IsAddingOnePunishment()
+        {
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseInMemoryDatabase(databaseName: "Add_writes_to_Add_Punishment_database")
+                .Options;
+
+            var appDbContext = new AppDbContext(options);
+            var punishmentRepository = new PunishmentRepository(appDbContext);
+            var punishmentService = new PunishmentService(punishmentRepository);
+            var punishmentController = new PunishmentController(punishmentService,_mapper);
+
+            punishmentController.AddPunishment(new PunishmentDTO
+            {
+                IdPrisoner = 0,
+                IdReason = 0,
+                Lifery = false,
+                StartDate = default,
+                EndDate = default
+            });
+
+            Assert.AreEqual(appDbContext.Punishments.Count(),1);
+        }
+
+        [Test]
+        public void IsDeletingOnePunishment()
+        {
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseInMemoryDatabase(databaseName: "Add_writes_to_Delete_Punishment_database")
+                .Options;
+
+            var appDbContext = new AppDbContext(options);
+            var punishmentRepository = new PunishmentRepository(appDbContext);
+            var punishmentService = new PunishmentService(punishmentRepository);
+            var punishmentController = new PunishmentController(punishmentService, _mapper);
+
+            punishmentController.AddPunishment(new PunishmentDTO
+            {
+                IdPrisoner = 0,
+                IdReason = 0,
+                Lifery = false,
+                StartDate = default,
+                EndDate = default
+            });
+
+            Assert.AreEqual(appDbContext.Punishments.Count(), 1);
+            punishmentController.DeletePunishment(1);
+            Assert.AreEqual(appDbContext.Punishments.Count(),0);
+        }
+
+        [Test]
+        public void IsSelectingOnePunishment()
+        {
+            var options = new DbContextOptionsBuilder<AppDbContext>()
+                .UseInMemoryDatabase(databaseName: "Add_writes_to_Select_Punishment_database")
+                .Options;
+
+            var appDbContext = new AppDbContext(options);
+            var punishmentRepository = new PunishmentRepository(appDbContext);
+            var punishmentService = new PunishmentService(punishmentRepository);
+            var punishmentController = new PunishmentController(punishmentService, _mapper);
+
+            appDbContext.Prisoners.Add(new Prisoner
+            {
+                Id = 1,
+                Name = null,
+                Forname = null,
+                Pesel = null,
+                Address = null,
+                Pass = false,
+                Behavior = 0,
+                Isolated = false,
+                IdCell = 0,
+                Cell = null,
+                Isolations = null,
+                Punishments = new List<Punishment>()
+            });
+
+            punishmentController.AddPunishment(new PunishmentDTO
+            {
+                IdPrisoner = 1,
+                IdReason = 0,
+                Lifery = false,
+                StartDate = default,
+                EndDate = default
+            });
+
+            Assert.AreEqual(appDbContext.Punishments.Count(), 1);
+            Assert.IsNotNull(appDbContext.Punishments.FirstOrDefault(x => x.IdPrisoner == 1));
+            Assert.AreEqual(appDbContext.Punishments.FirstOrDefault(x => x.IdPrisoner == 1),punishmentController.SelectedPunishment(1).Value);
+        }
+    }
+}

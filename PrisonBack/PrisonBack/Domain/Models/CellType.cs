@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace PrisonBack.Domain.Models
 {
     [Table("CellType")]
-    public class CellType
+    public class  CellType
     {
         [Key]
         public int Id { get; set; }

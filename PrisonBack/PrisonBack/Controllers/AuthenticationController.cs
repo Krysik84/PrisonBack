@@ -108,6 +108,8 @@ namespace PrisonBack.Controllers
             var userExists = await _userManager.FindByNameAsync(model.UserName);
             if (userExists != null)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Użytkownik już istnieje!" });
+            if (!_inviteCodeService.IsActive(model.InviteCode))
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Błędny kod zaproszenia!" });
 
             ApplicationUser user = new ApplicationUser()
             {
@@ -120,7 +122,6 @@ namespace PrisonBack.Controllers
             var result = await _userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
                 return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "Nie udało się stworzyć użytkownika!" });
-
             if (!await _roleManager.RoleExistsAsync(UserRoles.Admin))
                 await _roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
             if (!await _roleManager.RoleExistsAsync(UserRoles.User))

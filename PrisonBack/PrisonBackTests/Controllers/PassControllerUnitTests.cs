@@ -1,0 +1,118 @@
+using AutoMapper;
+using Moq;
+using NUnit.Framework;
+using PrisonBack.Controllers;
+using PrisonBack.Domain.Services;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using PrisonBack.Domain.Models;
+using PrisonBack.Mapping;
+using PrisonBack.Resources.DTOs;
+using PrisonBack.Resources.ViewModels;
+
+namespace PrisonBackTests.Controllers
+{
+    [TestFixture]
+    public class PassControllerUnitTests
+    {
+        private Mock<IPassService> _mockPassService;
+        private IMapper _mapper;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mockPassService = new Mock<IPassService>();
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new ModelToResourceProfile());
+            });
+            IMapper mapper = mappingConfig.CreateMapper();
+            _mapper = mapper;
+        }
+
+        private PassController CreatePassController()
+        {
+            return new PassController(
+                _mockPassService.Object,
+                _mapper);
+        }
+
+        [Test]
+        public void SelectedPass_UnitTests()
+        {
+            // Arrange
+            var passController = this.CreatePassController();
+            int id = 0;
+
+            // Act
+            var result = passController.SelectedPass(
+                id);
+
+            // Assert
+            Assert.IsInstanceOf<ActionResult<PassVM>>(result);
+        }
+
+        [Test]
+        public async Task AllPasses_UnitTests()
+        {
+            // Arrange
+            var passController = this.CreatePassController();
+            int id = 0;
+        
+            // Act
+            var result = await passController.AllPasses(
+                id);
+
+            // Assert
+            Assert.IsInstanceOf<IEnumerable<Pass>>(result);
+        }
+
+        [Test]
+        public void AddPass_UnitTests()
+        {
+            // Arrange
+            var passController = this.CreatePassController();
+
+            // Act
+            var result = passController.AddPass(
+                new PassDTO {EndDate = DateTime.Today.AddDays(1),IdPrisoner = 1,IdUser = 1,StartDate = DateTime.Today});
+
+            // Assert
+            Assert.IsInstanceOf<ActionResult<PassVM>>(result);
+        }
+
+        [Test]
+        public void DeletePass_UnitTests()
+        {
+            // Arrange
+            var passController = this.CreatePassController();
+            int id = 0;
+
+            // Act
+            var result = passController.DeletePass(
+                id);
+
+            // Assert
+            Assert.IsInstanceOf<ActionResult>(result);
+        }
+
+        [Test]
+        public void UpdatePass_UnitTests()
+        {
+            // Arrange
+            var passController = this.CreatePassController();
+            int id = 0;
+            PassDTO passDto = null;
+
+            // Act
+            var result = passController.UpdatePass(
+                id,
+                passDto);
+
+            // Assert
+            Assert.IsInstanceOf<ActionResult>(result);
+        }
+    }
+}

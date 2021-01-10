@@ -35,12 +35,13 @@ namespace PrisonBack.Controllers
             var pass = await _passService.AllPass(id);
             return pass;
         }
+        
         [HttpPost]
         public ActionResult<PassVM> AddPass(PassDTO passDTO)
         {
             var passModel = _mapper.Map<Pass>(passDTO);
             _passService.CreatePass(passModel);
-
+            
             _passService.SetPrisonerStatusTrue(passModel);
 
             _passService.SaveChanges();

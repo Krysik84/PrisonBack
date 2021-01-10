@@ -35,7 +35,7 @@ namespace PrisonBack.Controllers
         }
         [HttpGet]
         public async Task<IEnumerable<Prisoner>> AllPrisoner()
-        {
+        { 
             string userName = User.Identity.Name;
             
 

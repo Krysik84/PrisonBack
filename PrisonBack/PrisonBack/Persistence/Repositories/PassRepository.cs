@@ -50,10 +50,8 @@ namespace PrisonBack.Persistence.Repositories
 
         public void SetPrisonerStatusTrue(Pass pass)
         {
-   
             Prisoner prisoner = _context.Prisoners.FirstOrDefault(x => x.Id == pass.IdPrisoner);
-            prisoner.Pass = true;
-
+            if (prisoner != null) prisoner.Pass = true;
         }
 
         public void UpdatePass(Pass pass)
